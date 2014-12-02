@@ -5,11 +5,10 @@
 
 require_relative './lib/daily_build_manager'
 
-S3_BUCKET = "katt-packages"
-#S3_BUCKET="kuali-coeus"
-APPLICATION = "UAR"
-BUILD_TYPE = "DAILY"
-
+s3_bucket = "katt-packages"
+s3_path = "kuali/kuali-coeus"
+build_type = "release"
+application = "UAR"
 
 def get_build_number
   begin
@@ -21,14 +20,21 @@ def get_build_number
   end
 end
 
-build_manager = DailyBuildManager.new(S3_BUCKET)
+build_manager = DailyBuildManager.new(s3_bucket)
 
-puts "available buckets are:"
-build_manager.list_all_buckets
+# list available buckets are in S3
+#build_manager.list_all_buckets
 
-puts "contents of #{S3_BUCKET} bucket:"
-build_manager.get_all_daily_packages
+# list contents of #{s3_bucket}/#{s3_path}
+#build_manager.list_bucket_objects(s3_bucket, s3_path)
 
-puts "getting specific build"
-build_to_deploy = get_build_number
-puts "Build to deploy: #{build_to_deploy}."
+# list desired type of packages
+desired_packages = build_manager.get_desired_packages(s3_bucket, s3_path, build_type)
+
+# get most recent package
+package_path = desired_packages.last[:key]
+puts "latest #{build_type} package path is: " + package_path
+
+#puts "getting specific build"
+#build_to_deploy = get_build_number
+#puts "Build to deploy: #{build_to_deploy}."
