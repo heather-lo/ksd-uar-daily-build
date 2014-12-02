@@ -35,6 +35,10 @@ desired_packages = build_manager.get_desired_packages(s3_bucket, s3_path, build_
 package_path = desired_packages.last[:key]
 puts "latest #{build_type} package path is: " + package_path
 
+package_name = package_path.match(/kuali-coeus-5.2.1-ua-(.*).tar.gz/)
+puts "latest #{build_type} package name: " + package_name.to_s
+puts "latest #{build_type} package substring: " + package_name[1]
+
 #puts "getting specific build"
 #build_to_deploy = get_build_number
 #puts "Build to deploy: #{build_to_deploy}."
