@@ -7,7 +7,7 @@ require_relative './lib/daily_build_manager'
 
 s3_bucket = "katt-packages"
 s3_path = "kuali/kuali-coeus"
-build_type = "release"
+build_type = "daily"
 application = "UAR"
 
 def get_build_number

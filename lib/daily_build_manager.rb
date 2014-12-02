@@ -2,7 +2,7 @@ require 'aws-sdk'
 
 class DailyBuildManager
 
-  DAILY_BUILD_TYPE = "latest"
+  DAILY_BUILD_TYPE = "daily"
   DAILY_BUILD_NAME = "build"
   RELEASE_BUILD_TYPE = "release"
   RELEASE_BUILD_NAME = "release"
